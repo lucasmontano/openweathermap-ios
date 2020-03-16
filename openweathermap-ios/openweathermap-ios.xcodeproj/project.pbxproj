@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		36EC2D42241FA11100A168F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EC2D41241FA11100A168F4 /* AppDelegate.swift */; };
-		36EC2D46241FA11100A168F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EC2D45241FA11100A168F4 /* ViewController.swift */; };
 		36EC2D49241FA11100A168F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC2D47241FA11100A168F4 /* Main.storyboard */; };
 		36EC2D4B241FA11300A168F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EC2D4A241FA11300A168F4 /* Assets.xcassets */; };
 		36EC2D4E241FA11300A168F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC2D4C241FA11300A168F4 /* LaunchScreen.storyboard */; };
+		5587459024202F27001A2DE3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587458F24202F27001A2DE3 /* MapViewController.swift */; };
+		5587459524203087001A2DE3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587459424203087001A2DE3 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		36EC2D3E241FA11100A168F4 /* openweathermap-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "openweathermap-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36EC2D41241FA11100A168F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36EC2D45241FA11100A168F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		36EC2D48241FA11100A168F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36EC2D4A241FA11300A168F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36EC2D4D241FA11300A168F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36EC2D4F241FA11300A168F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5587458F24202F27001A2DE3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "openweathermap-ios/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
+		5587459424203087001A2DE3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = "openweathermap-ios/DetailsViewController.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +56,9 @@
 		36EC2D40241FA11100A168F4 /* openweathermap-ios */ = {
 			isa = PBXGroup;
 			children = (
+				36EC2D57241FB21B00A168F4 /* ViewControllers */,
 				36EC2D41241FA11100A168F4 /* AppDelegate.swift */,
 				36EC2D47241FA11100A168F4 /* Main.storyboard */,
-				36EC2D57241FB21B00A168F4 /* ViewControllers */,
 				36EC2D55241FAA1000A168F4 /* Support Files */,
 			);
 			path = "openweathermap-ios";
@@ -75,7 +77,8 @@
 		36EC2D57241FB21B00A168F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				36EC2D45241FA11100A168F4 /* ViewController.swift */,
+				5587458F24202F27001A2DE3 /* MapViewController.swift */,
+				5587459424203087001A2DE3 /* DetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -150,8 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36EC2D46241FA11100A168F4 /* ViewController.swift in Sources */,
 				36EC2D42241FA11100A168F4 /* AppDelegate.swift in Sources */,
+				5587459024202F27001A2DE3 /* MapViewController.swift in Sources */,
+				5587459524203087001A2DE3 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
