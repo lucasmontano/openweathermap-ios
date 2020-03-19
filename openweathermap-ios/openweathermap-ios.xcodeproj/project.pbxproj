@@ -12,7 +12,6 @@
 		36EC2D4B241FA11300A168F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EC2D4A241FA11300A168F4 /* Assets.xcassets */; };
 		36EC2D4E241FA11300A168F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC2D4C241FA11300A168F4 /* LaunchScreen.storyboard */; };
 		5587459024202F27001A2DE3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587458F24202F27001A2DE3 /* MapViewController.swift */; };
-		5587459524203087001A2DE3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587459424203087001A2DE3 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +22,6 @@
 		36EC2D4D241FA11300A168F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36EC2D4F241FA11300A168F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5587458F24202F27001A2DE3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "openweathermap-ios/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
-		5587459424203087001A2DE3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = "openweathermap-ios/DetailsViewController.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				5587458F24202F27001A2DE3 /* MapViewController.swift */,
-				5587459424203087001A2DE3 /* DetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -155,7 +152,6 @@
 			files = (
 				36EC2D42241FA11100A168F4 /* AppDelegate.swift in Sources */,
 				5587459024202F27001A2DE3 /* MapViewController.swift in Sources */,
-				5587459524203087001A2DE3 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
