@@ -7,10 +7,10 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+final class MapViewController: UIViewController, CLLocationManagerDelegate {
 
-    @IBOutlet weak var mapView: MKMapView!
-    let locationManager = CLLocationManager()
+    @IBOutlet private weak var mapView: MKMapView!
+    private let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +25,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func addAnnotation(location: CLLocationCoordinate2D){
-        print("Coordenate center: \(mapView.centerCoordinate)")
-        let circleCenter = MKCircle(center: location, radius: 50)
-        let circleEdge = MKCircle(center: location, radius: 5)
+        let circleCenter = MKCircle(center: location, radius: 5)
+        let circleEdge = MKCircle(center: location, radius: 50)
         
-        mapView.overlays.forEach { (overlay) in
-            if (overlay is MKCircle){
+        mapView.overlays.forEach { overlay in
+            if overlay is MKCircle{
                 mapView.removeOverlay(overlay)
             }
         }
@@ -39,9 +38,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
 }
 
-extension MapViewController: MKMapViewDelegate{
+extension MapViewController: MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status != .authorizedWhenInUse{
+        if status != .authorizedWhenInUse {
             let alertController = UIAlertController(title: "Permission needed", message: "Without permission the app will not work correctly", preferredStyle: .alert)
             let actionConfig = UIAlertAction(title: "Settings", style: .default) { (alertConfig) in
                 if let config = URL(string: UIApplication.openSettingsURLString){
@@ -55,15 +54,16 @@ extension MapViewController: MKMapViewDelegate{
             present(alertController, animated: true, completion: nil)
         }
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locationUser = locations.last
-        guard let latitude = locationUser?.coordinate.latitude else { return }
-        guard let longitude = locationUser?.coordinate.longitude else { return }
+        guard let locationUser = locations.last else { return }
+        let latitude = locationUser.coordinate.latitude
+        let longitude = locationUser.coordinate.longitude
         
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        let mySpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-        let region = MKCoordinateRegion(center: location, span: mySpan)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
     }
     
