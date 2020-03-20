@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  openweathermap-ios
+*/
+"titleUIAlertController" = "Permission needed";
+"messageUIAlertController" = "Without permission the app will not work correctly";
+"settingsUIAlertAction" = "Settings";
+"cancelUIAlertAction" = "Cancel";

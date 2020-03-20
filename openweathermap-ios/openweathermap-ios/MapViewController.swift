@@ -41,13 +41,19 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status != .authorizedWhenInUse {
-            let alertController = UIAlertController(title: "Permission needed", message: "Without permission the app will not work correctly", preferredStyle: .alert)
-            let actionConfig = UIAlertAction(title: "Settings", style: .default) { (alertConfig) in
+            let localizedTitleAlertController = NSLocalizedString("titleUIAlertController", comment: "")
+            let localizedContentAlertController = NSLocalizedString("messageUIAlertController", comment: "")
+            let alertController = UIAlertController(title: localizedTitleAlertController, message: localizedContentAlertController, preferredStyle: .alert)
+            
+            let localizedTitleAlertActionConfig = NSLocalizedString("settingsUIAlertAction", comment: "")
+            let actionConfig = UIAlertAction(title: localizedTitleAlertActionConfig, style: .default) { alertConfig in
                 if let config = URL(string: UIApplication.openSettingsURLString){
                     UIApplication.shared.open(config)
                 }
             }
-            let actionCancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            let localizedTitleAlertActionCancel = NSLocalizedString("cancelUIAlertAction", comment: "")
+            let actionCancel = UIAlertAction(title: localizedTitleAlertActionCancel, style: .default, handler: nil)
             
             alertController.addAction(actionConfig)
             alertController.addAction(actionCancel)
@@ -81,5 +87,13 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         addAnnotation(location: mapView.centerCoordinate)
+    }
+}
+
+extension String {
+    func localizableString(loc: String) -> String {
+        guard let path = Bundle.main.path(forResource: loc, ofType: "lproj") else { return ""}
+        guard let bundle = Bundle(path: path) else { return ""}
+        return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
     }
 }
