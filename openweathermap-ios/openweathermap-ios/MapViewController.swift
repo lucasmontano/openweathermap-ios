@@ -7,7 +7,7 @@
 import UIKit
 import MapKit
 
-final class MapViewController: UIViewController, CLLocationManagerDelegate {
+final class MapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     private let locationManager = CLLocationManager()
@@ -22,9 +22,10 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
     }
-    
-    
-    func addAnnotation(location: CLLocationCoordinate2D){
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    func updateAnnotation(location: CLLocationCoordinate2D) {
         let circleCenter = MKCircle(center: location, radius: 5)
         let circleEdge = MKCircle(center: location, radius: 50)
         
@@ -41,22 +42,23 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status != .authorizedWhenInUse {
-            let localizedTitleAlertController = NSLocalizedString("titleUIAlertController", comment: "")
-            let localizedContentAlertController = NSLocalizedString("messageUIAlertController", comment: "")
-            let alertController = UIAlertController(title: localizedTitleAlertController, message: localizedContentAlertController, preferredStyle: .alert)
+            let alertTitle = NSLocalizedString("titleUIAlertController", comment: "")
+            let alertMessage = NSLocalizedString("messageUIAlertController", comment: "")
+            let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
             
-            let localizedTitleAlertActionConfig = NSLocalizedString("settingsUIAlertAction", comment: "")
-            let actionConfig = UIAlertAction(title: localizedTitleAlertActionConfig, style: .default) { alertConfig in
-                if let config = URL(string: UIApplication.openSettingsURLString){
-                    UIApplication.shared.open(config)
+            let settingsTitle = NSLocalizedString("settingsUIAlertAction", comment: "")
+            let settingsAction = UIAlertAction(title: settingsTitle, style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl)
                 }
             }
             
-            let localizedTitleAlertActionCancel = NSLocalizedString("cancelUIAlertAction", comment: "")
-            let actionCancel = UIAlertAction(title: localizedTitleAlertActionCancel, style: .default, handler: nil)
+            let cancelTitle = NSLocalizedString("cancelUIAlertAction", comment: "")
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: nil)
             
-            alertController.addAction(actionConfig)
-            alertController.addAction(actionCancel)
+            alertController.addAction(settingsAction)
+            alertController.addAction(cancelAction)
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -74,26 +76,17 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is MKCircle{
-            let renderer = MKCircleRenderer(overlay: overlay)
-            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
-            renderer.strokeColor = UIColor.black
-            renderer.lineWidth = 1
-            return renderer
+        guard overlay is MKCircle else {
+            return MKOverlayRenderer()
         }
-        
-        return MKOverlayRenderer()
+        let renderer = MKCircleRenderer(overlay: overlay)
+        renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.black
+        renderer.lineWidth = 1
+        return renderer
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        addAnnotation(location: mapView.centerCoordinate)
-    }
-}
-
-extension String {
-    func localizableString(loc: String) -> String {
-        guard let path = Bundle.main.path(forResource: loc, ofType: "lproj") else { return ""}
-        guard let bundle = Bundle(path: path) else { return ""}
-        return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+        updateAnnotation(location: mapView.centerCoordinate)
     }
 }
