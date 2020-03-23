@@ -20,11 +20,8 @@ final class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
     }
-}
-
-extension MapViewController: CLLocationManagerDelegate {
+    
     func updateAnnotation(location: CLLocationCoordinate2D) {
         let circleCenter = MKCircle(center: location, radius: 5)
         let circleEdge = MKCircle(center: location, radius: 50)
@@ -40,6 +37,23 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard overlay is MKCircle else {
+            return MKOverlayRenderer()
+        }
+        let renderer = MKCircleRenderer(overlay: overlay)
+        renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.black
+        renderer.lineWidth = 1
+        return renderer
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        updateAnnotation(location: mapView.centerCoordinate)
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status != .authorizedWhenInUse {
             let alertTitle = NSLocalizedString("titleUIAlertController", comment: "")
@@ -47,7 +61,7 @@ extension MapViewController: MKMapViewDelegate {
             let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
             
             let settingsTitle = NSLocalizedString("settingsUIAlertAction", comment: "")
-            let settingsAction = UIAlertAction(title: settingsTitle, style: .default) { (_) -> Void in
+            let settingsAction = UIAlertAction(title: settingsTitle, style: .default) { _ in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                 if UIApplication.shared.canOpenURL(settingsUrl) {
                     UIApplication.shared.open(settingsUrl)
@@ -73,20 +87,5 @@ extension MapViewController: MKMapViewDelegate {
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard overlay is MKCircle else {
-            return MKOverlayRenderer()
-        }
-        let renderer = MKCircleRenderer(overlay: overlay)
-        renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
-        renderer.strokeColor = UIColor.black
-        renderer.lineWidth = 1
-        return renderer
-    }
-    
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        updateAnnotation(location: mapView.centerCoordinate)
     }
 }
