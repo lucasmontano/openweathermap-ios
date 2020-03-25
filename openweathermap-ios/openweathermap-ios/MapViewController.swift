@@ -22,6 +22,14 @@ final class MapViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
+    func addAnnotation(location: CLLocationCoordinate2D) {
+        let annotation = Annotation(coordinate: location, title: "City city", subtitle: "Weather weather")
+        if let removeAnnotation = mapView.annotations.first{
+            mapView.removeAnnotation(removeAnnotation)
+        }
+        mapView.addAnnotation(annotation)
+    }
+    
     func updateAnnotation(location: CLLocationCoordinate2D) {
         let circleCenter = MKCircle(center: location, radius: 5)
         let circleEdge = MKCircle(center: location, radius: 50)
@@ -46,6 +54,32 @@ extension MapViewController: MKMapViewDelegate {
         renderer.strokeColor = UIColor.black
         renderer.lineWidth = 1
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        addAnnotation(location: mapView.centerCoordinate)
+        mapView.overlays.forEach { overlay in
+            if overlay is MKCircle{
+                mapView.removeOverlay(overlay)
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if let annotation = mapView.annotations.first {
+            mapView.removeAnnotation(annotation)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.isKind(of: MKUserLocation.self) {
+            return nil
+        }
+        
+        let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "annotation")
+        annotationView.canShowCallout = true
+        annotationView.isSelected = true
+        return annotationView
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
