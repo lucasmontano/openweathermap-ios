@@ -85,13 +85,14 @@
 				5587458F24202F27001A2DE3 /* MapViewController.swift */,
 			);
 			name = ViewControllers;
-			path = ../../ViewControllers;
+			path = ../ViewControllers;
 			sourceTree = "<group>";
 		};
 		55E0C6FF242BDC48004AE9D4 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
 				55E0C700242BDC81004AE9D4 /* Model */,
+				36EC2D57241FB21B00A168F4 /* ViewControllers */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -101,7 +102,6 @@
 			children = (
 				55E0C701242BDCA6004AE9D4 /* Annotation.swift */,
 				55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */,
-				36EC2D57241FB21B00A168F4 /* ViewControllers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
