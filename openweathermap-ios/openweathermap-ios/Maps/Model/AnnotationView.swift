@@ -1,11 +1,6 @@
-//
-//  AnnotationView.swift
-//  openweathermap-ios
-//
-
 import MapKit
 
-class AnnotationView: MKAnnotationView {
+final class AnnotationView: MKAnnotationView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

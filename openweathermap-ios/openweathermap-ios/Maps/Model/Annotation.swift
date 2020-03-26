@@ -1,14 +1,9 @@
-//
-//  Annotation.swift
-//  openweathermap-ios
-//
-
 import MapKit
 
-class Annotation: NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
+final class Annotation: NSObject, MKAnnotation {
+    let coordinate: CLLocationCoordinate2D
+    let title: String?
+    let subtitle: String?
     
     init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
         self.coordinate = coordinate
@@ -17,6 +12,7 @@ class Annotation: NSObject, MKAnnotation {
     }
 
     func image() -> UIImage {
-        return UIImage(systemName: "mappin")!
+        guard let image = UIImage(systemName: "mappin") else { return UIImage() }
+        return image
     }
 }

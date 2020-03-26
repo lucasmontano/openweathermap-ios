@@ -25,7 +25,7 @@
 		36EC2D4D241FA11300A168F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36EC2D4F241FA11300A168F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557BB3BD242545D3004B5037 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5587458F24202F27001A2DE3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "openweathermap-ios/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
+		5587458F24202F27001A2DE3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "openweathermap-ios/Maps/ViewControllers/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
 		55E0C701242BDCA6004AE9D4 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,20 +79,19 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
-		36EC2D57241FB21B00A168F4 /* ViewControllers */ = {
+		559ECD21242CEBFC00A5485C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				5587458F24202F27001A2DE3 /* MapViewController.swift */,
 			);
-			name = ViewControllers;
-			path = ../ViewControllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		55E0C6FF242BDC48004AE9D4 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
 				55E0C700242BDC81004AE9D4 /* Model */,
-				36EC2D57241FB21B00A168F4 /* ViewControllers */,
+				559ECD21242CEBFC00A5485C /* ViewControllers */,
 			);
 			path = Maps;
 			sourceTree = "<group>";

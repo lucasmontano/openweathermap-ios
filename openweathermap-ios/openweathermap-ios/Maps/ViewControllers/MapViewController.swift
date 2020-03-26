@@ -22,20 +22,20 @@ final class MapViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
-    func addAnnotation(location: CLLocationCoordinate2D) {
-        let annotation = Annotation(coordinate: location, title: "City city", subtitle: "Weather weather")
-        if let removeAnnotation = mapView.annotations.first{
+    func updateAnnotation(location: CLLocationCoordinate2D) {
+        let annotation = Annotation(coordinate: location, title: "Rio Grande", subtitle: "Mostly Cloudy")
+        if let removeAnnotation = mapView.annotations.first {
             mapView.removeAnnotation(removeAnnotation)
         }
         mapView.addAnnotation(annotation)
     }
     
-    func updateAnnotation(location: CLLocationCoordinate2D) {
+    func updateTarget(location: CLLocationCoordinate2D) {
         let circleCenter = MKCircle(center: location, radius: 5)
         let circleEdge = MKCircle(center: location, radius: 50)
         
         mapView.overlays.forEach { overlay in
-            if overlay is MKCircle{
+            if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
             }
         }
@@ -57,9 +57,9 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        addAnnotation(location: mapView.centerCoordinate)
+        updateAnnotation(location: mapView.centerCoordinate)
         mapView.overlays.forEach { overlay in
-            if overlay is MKCircle{
+            if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
             }
         }
@@ -83,7 +83,7 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        updateAnnotation(location: mapView.centerCoordinate)
+        updateTarget(location: mapView.centerCoordinate)
     }
 }
 
