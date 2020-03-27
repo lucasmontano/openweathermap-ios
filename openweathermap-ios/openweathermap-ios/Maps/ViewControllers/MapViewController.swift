@@ -23,11 +23,19 @@ final class MapViewController: UIViewController {
     }
     
     func updateAnnotation(location: CLLocationCoordinate2D) {
+        let annotation = Annotation(coordinate: location, title: "Rio Grande", subtitle: "Mostly Cloudy")
+        if let removeAnnotation = mapView.annotations.first {
+            mapView.removeAnnotation(removeAnnotation)
+        }
+        mapView.addAnnotation(annotation)
+    }
+    
+    func updateTarget(location: CLLocationCoordinate2D) {
         let circleCenter = MKCircle(center: location, radius: 5)
         let circleEdge = MKCircle(center: location, radius: 50)
         
         mapView.overlays.forEach { overlay in
-            if overlay is MKCircle{
+            if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
             }
         }
@@ -48,8 +56,34 @@ extension MapViewController: MKMapViewDelegate {
         return renderer
     }
     
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         updateAnnotation(location: mapView.centerCoordinate)
+        mapView.overlays.forEach { overlay in
+            if overlay is MKCircle {
+                mapView.removeOverlay(overlay)
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if let annotation = mapView.annotations.first {
+            mapView.removeAnnotation(annotation)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.isKind(of: MKUserLocation.self) {
+            return nil
+        }
+        
+        let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "annotation")
+        annotationView.canShowCallout = true
+        annotationView.isSelected = true
+        return annotationView
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        updateTarget(location: mapView.centerCoordinate)
     }
 }
 
