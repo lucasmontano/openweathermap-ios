@@ -89,7 +89,7 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status != .authorizedWhenInUse {
+		if status != .authorizedWhenInUse && status != .notDetermined {
             let alertTitle = NSLocalizedString("titleUIAlertController", comment: "")
             let alertMessage = NSLocalizedString("messageUIAlertController", comment: "")
             let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -110,16 +110,5 @@ extension MapViewController: CLLocationManagerDelegate {
             present(alertController, animated: true, completion: nil)
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locationUser = locations.last else { return }
-        let latitude = locationUser.coordinate.latitude
-        let longitude = locationUser.coordinate.longitude
-        
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-    }
+	
 }
