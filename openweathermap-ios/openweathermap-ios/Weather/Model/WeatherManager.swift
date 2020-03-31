@@ -1,4 +1,3 @@
-import Foundation
 import CoreLocation
 
 protocol WeatherManagerDelegate {

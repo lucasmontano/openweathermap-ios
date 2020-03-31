@@ -11,6 +11,10 @@ final class MapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     private let locationManager = CLLocationManager()
+    private var weatherManager = WeatherManager()
+    
+    private var cityName: String = ""
+    private var descriptionWeather: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +24,11 @@ final class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        weatherManager.delegate = self
     }
     
-    func updateAnnotation(location: CLLocationCoordinate2D) {
-        let annotation = Annotation(coordinate: location, title: "Rio Grande", subtitle: "Mostly Cloudy")
+    func updateAnnotation(location: CLLocationCoordinate2D, city: String, description: String) {
+        let annotation = Annotation(coordinate: location, title: city, subtitle: description)
         if let removeAnnotation = mapView.annotations.first {
             mapView.removeAnnotation(removeAnnotation)
         }
@@ -57,7 +62,8 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        updateAnnotation(location: mapView.centerCoordinate)
+        weatherManager.fetchWeather(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        updateAnnotation(location: mapView.centerCoordinate, city: cityName, description: descriptionWeather)
         mapView.overlays.forEach { overlay in
             if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
@@ -121,5 +127,14 @@ extension MapViewController: CLLocationManagerDelegate {
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
+    }
+}
+
+extension MapViewController: WeatherManagerDelegate {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        DispatchQueue.main.async {
+            self.cityName = "\(weather.city)"
+            self.descriptionWeather = "\(weather.description) (\(weather.temperature))"
+        }
     }
 }
