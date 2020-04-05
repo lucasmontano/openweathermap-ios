@@ -3,7 +3,6 @@
 //  openweathermap-ios
 //
 
-
 import UIKit
 import MapKit
 
