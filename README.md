@@ -104,17 +104,21 @@ https://github.com/lucasmontano/openweathermap-ios
 
 ### Step 3
 
-- 🎋 Create your feature branch using `git checkout -b my-feature`
+- :art: Install SwiftLint with homebrew using `brew install swiftlint`
 
 ### Step 4
 
-- ✅ Commit your changes using `git commit -m 'feat: My new feature'`;
+- 🎋 Create your feature branch using `git checkout -b my-feature`
 
 ### Step 5
 
-- 📌 Push to the branch using `git push origin my-feature`;
+- ✅ Commit your changes using `git commit -m 'feat: My new feature'`;
 
 ### Step 6
+
+- 📌 Push to the branch using `git push origin my-feature`;
+
+### Step 7
 
 - 🔃 Create a new pull request
 
