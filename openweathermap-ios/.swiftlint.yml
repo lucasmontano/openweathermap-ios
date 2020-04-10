@@ -21,7 +21,6 @@ whitelist_rules:
   - unused_optional_binding
   - vertical_whitespace
   - void_return
-  - custom_rules
   - indentation
 
 excluded:
@@ -31,11 +30,4 @@ excluded:
 colon:
   apply_to_dictionaries: false
 
-indentation: 2
-
-custom_rules:
-  no_objcMembers:
-    name: "@objcMembers"
-    regex: "@objcMembers"
-    message: "Explicitly use @objc on each member you want to expose to Objective-C"
-    severity: error
+indentation: 4
