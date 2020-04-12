@@ -43,9 +43,10 @@
 
 ### Prerequisites
 
-- To run any iOS application built with Kotlin you need to configure the environment on your machine.
+- To run any iOS application built with Swift you need to configure the environment on your machine.
 
-> Needs complementation
+- Xcode 11.0, *
+- Homebrew
 
 ### Clone
 
@@ -82,7 +83,10 @@ https://github.com/lucasmontano/openweathermap-ios
 
 ### Build with
 
-- > Needs complementation, e.g.: https://github.com/lucasmontano/openweathermap-reactnative#build-with
+- Core:
+  - [Swift](https://www.apple.com/swift/) - A powerful open language that lets everyone build amazing apps.
+- Linting:
+  - [SwiftLint](https://realm.github.io/SwiftLint/) - A tool to enforce Swift style and conventions.
 
 ---
 
@@ -100,17 +104,21 @@ https://github.com/lucasmontano/openweathermap-ios
 
 ### Step 3
 
-- 🎋 Create your feature branch using `git checkout -b my-feature`
+- :art: Install SwiftLint with homebrew using `brew install swiftlint`
 
 ### Step 4
 
-- ✅ Commit your changes using `git commit -m 'feat: My new feature'`;
+- 🎋 Create your feature branch using `git checkout -b my-feature`
 
 ### Step 5
 
-- 📌 Push to the branch using `git push origin my-feature`;
+- ✅ Commit your changes using `git commit -m 'feat: My new feature'`;
 
 ### Step 6
+
+- 📌 Push to the branch using `git push origin my-feature`;
+
+### Step 7
 
 - 🔃 Create a new pull request
 
