@@ -101,6 +101,7 @@ extension MapViewController: MKMapViewDelegate {
         let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "annotation")
         annotationView.canShowCallout = true
         annotationView.isSelected = true
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         return annotationView
     }
     
