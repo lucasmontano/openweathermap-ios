@@ -5,10 +5,13 @@ struct WeatherData: Codable {
     let weather: [Weather]
 }
 
-struct Main: Codable {
-    let temp: Double
-}
-
-struct Weather: Codable {
-    let description: String
+extension WeatherData {
+    struct Main: Codable {
+        let temp: Double
+    }
+    
+    struct Weather: Codable {
+        let description: String
+        let id: Int
+    }
 }

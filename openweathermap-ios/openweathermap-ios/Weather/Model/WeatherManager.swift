@@ -1,11 +1,11 @@
 import CoreLocation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(weather: WeatherDataResponse)
 }
 
-struct WeatherManager {
-    let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=dc05b8287f28b9113a9f84641e77bff5&units=metric"
+final class WeatherManager {
+    private let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=c6e381d8c7ff98f0fee43775817cf6ad&units=metric"
     
     var delegate: WeatherManagerDelegate?
     
@@ -14,31 +14,31 @@ struct WeatherManager {
         getRequest(with: urlString)
     }
     
-    func getRequest(with utlString: String) {
-        if let url = URL(string: utlString) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, erro) in
-                if erro != nil{
-                    return
-                }
-                if let safeData = data {
-                    if let weather = self.parseJSON(safeData){
-                        self.delegate?.didUpdateWeather(self, weather: weather)
-                    }
+    private func getRequest(with utlString: String) {
+        guard let url = URL(string: utlString) else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { (data, response, erro) in
+            if erro != nil{
+                return
+            }
+            if let safeData = data {
+                if let weather = self.parseJSON(safeData){
+                    self.delegate?.didUpdateWeather(weather: weather)
                 }
             }
-            task.resume()
         }
+        task.resume()
     }
     
-    func parseJSON(_ weatherData: Data) -> WeatherModel? {
+    private func parseJSON(_ weatherData: Data) -> WeatherDataResponse? {
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(WeatherData.self, from: weatherData)
-            let name = decodeData.name
+            let cityName = decodeData.name
             let temp = decodeData.main.temp
             let description = decodeData.weather[0].description
-            let weather = WeatherModel(city: name, temp: temp, description: description)
+            let id = decodeData.weather[0].id
+            let weather = WeatherDataResponse(city: cityName, temp: temp, description: description, conditionId: id)
             return weather
         } catch {
             return nil

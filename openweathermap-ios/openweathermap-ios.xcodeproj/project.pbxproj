@@ -14,7 +14,7 @@
 		557BB3BC242545D3004B5037 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557BB3BE242545D3004B5037 /* Localizable.strings */; };
 		5587459024202F27001A2DE3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587458F24202F27001A2DE3 /* MapViewController.swift */; };
 		559AB8DB2433670D002DF4EF /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB8DA2433670D002DF4EF /* WeatherManager.swift */; };
-		559AB8DD2433675B002DF4EF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB8DC2433675B002DF4EF /* WeatherModel.swift */; };
+		559AB8DD2433675B002DF4EF /* WeatherDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB8DC2433675B002DF4EF /* WeatherDataResponse.swift */; };
 		559AB8DF2433679A002DF4EF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB8DE2433679A002DF4EF /* WeatherData.swift */; };
 		55E0C702242BDCA7004AE9D4 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E0C701242BDCA6004AE9D4 /* Annotation.swift */; };
 		55E0C704242BDCEA004AE9D4 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */; };
@@ -30,7 +30,7 @@
 		557BB3BD242545D3004B5037 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5587458F24202F27001A2DE3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "openweathermap-ios/Maps/ViewControllers/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
 		559AB8DA2433670D002DF4EF /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
-		559AB8DC2433675B002DF4EF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		559AB8DC2433675B002DF4EF /* WeatherDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataResponse.swift; sourceTree = "<group>"; };
 		559AB8DE2433679A002DF4EF /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		55E0C701242BDCA6004AE9D4 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				559AB8DA2433670D002DF4EF /* WeatherManager.swift */,
-				559AB8DC2433675B002DF4EF /* WeatherModel.swift */,
+				559AB8DC2433675B002DF4EF /* WeatherDataResponse.swift */,
 				559AB8DE2433679A002DF4EF /* WeatherData.swift */,
 			);
 			path = Model;
@@ -206,7 +206,7 @@
 				559AB8DF2433679A002DF4EF /* WeatherData.swift in Sources */,
 				559AB8DB2433670D002DF4EF /* WeatherManager.swift in Sources */,
 				55E0C702242BDCA7004AE9D4 /* Annotation.swift in Sources */,
-				559AB8DD2433675B002DF4EF /* WeatherModel.swift in Sources */,
+				559AB8DD2433675B002DF4EF /* WeatherDataResponse.swift in Sources */,
 				5587459024202F27001A2DE3 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +359,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "openweathermap-ios/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -369,6 +371,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.openweathermap-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,8 +381,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "openweathermap-ios/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -388,6 +393,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.openweathermap-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

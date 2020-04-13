@@ -11,7 +11,7 @@ final class MapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     private let locationManager = CLLocationManager()
-    private var weatherManager = WeatherManager()
+    private let weatherManager = WeatherManager()
     
     private var cityName: String = ""
     private var descriptionWeather: String = ""
@@ -27,8 +27,8 @@ final class MapViewController: UIViewController {
         weatherManager.delegate = self
     }
     
-    func updateAnnotation(location: CLLocationCoordinate2D, city: String, description: String) {
-        let annotation = Annotation(coordinate: location, title: city, subtitle: description)
+    func updateAnnotation(location: CLLocationCoordinate2D) {
+        let annotation = Annotation(coordinate: location, title: cityName, subtitle: descriptionWeather)
         if let removeAnnotation = mapView.annotations.first {
             mapView.removeAnnotation(removeAnnotation)
         }
@@ -63,7 +63,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         weatherManager.fetchWeather(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        updateAnnotation(location: mapView.centerCoordinate, city: cityName, description: descriptionWeather)
+        updateAnnotation(location: mapView.centerCoordinate)
         mapView.overlays.forEach { overlay in
             if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
@@ -131,10 +131,8 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        DispatchQueue.main.async {
-            self.cityName = "\(weather.city)"
-            self.descriptionWeather = "\(weather.description) (\(weather.temperature))"
-        }
+    func didUpdateWeather(weather: WeatherDataResponse) {
+        cityName = "\(weather.city)"
+        descriptionWeather = "\(weather.description) (\(weather.temperature))"
     }
 }
