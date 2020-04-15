@@ -1,32 +1,17 @@
 
-struct WeatherDataResponse {
-    let city: String
-    let temp: Double
-    let description: String
-    let conditionId: Int
-    
-    var temperature: String {
-        return String(format: "%.1f", temp)
+struct WeatherDataResponse: Codable {
+    let name: String
+    let main: Main
+    let weather: [Weather]
+}
+
+extension WeatherDataResponse {
+    struct Main: Codable {
+        let temp: Double
     }
     
-    var conditionName: String {
-        switch conditionId {
-        case 200...232:
-            return "could.bolt"
-        case 300...301:
-            return "clod.drizzle"
-        case 500...531:
-            return "cloud.rain"
-        case 600...622:
-            return "cloud.snow"
-        case 701...781:
-            return "cloud.fog"
-        case 800:
-            return "sun.max"
-        case 801...804:
-            return "cloud.bolt"
-        default:
-            return "cloud"
-        }
+    struct Weather: Codable {
+        let description: String
+        let id: Int
     }
 }

@@ -15,7 +15,6 @@ final class MapViewController: UIViewController {
     
     private var cityName: String = ""
     private var descriptionWeather: String = ""
-    private var isFetchWeather = true
     private var lastCenterCoordinate = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
@@ -49,11 +48,6 @@ final class MapViewController: UIViewController {
         mapView.addOverlay(circleCenter)
         mapView.addOverlay(circleEdge)
     }
-    
-    func getDistanceBetweenTwoPoints(currentCenterCoordinate: CLLocationCoordinate2D) -> CLLocationDistance {
-        let current = CLLocation(latitude: currentCenterCoordinate.latitude, longitude: currentCenterCoordinate.longitude)
-        return CLLocation(latitude: lastCenterCoordinate.latitude, longitude: lastCenterCoordinate.longitude).distance(from: current)
-    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -69,16 +63,12 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let distance = getDistanceBetweenTwoPoints(currentCenterCoordinate: mapView.centerCoordinate)
-        if distance > 20000 {
-            isFetchWeather = true
+        let newCoordinate = mapView.centerCoordinate
+        let distance = newCoordinate.betweenTwoPoints(coordinate: lastCenterCoordinate)
+        if distance > 20_000 {
+            lastCenterCoordinate = newCoordinate
+            weatherManager.fetchWeather(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
         }
-        if isFetchWeather {
-            lastCenterCoordinate = mapView.centerCoordinate
-            weatherManager.fetchWeather(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-            isFetchWeather = false
-        }
-        weatherManager.fetchWeather(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         updateAnnotation(location: mapView.centerCoordinate)
         mapView.overlays.forEach { overlay in
             if overlay is MKCircle {
@@ -101,7 +91,6 @@ extension MapViewController: MKMapViewDelegate {
         let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "annotation")
         annotationView.canShowCallout = true
         annotationView.isSelected = true
-        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         return annotationView
     }
     
@@ -148,8 +137,15 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: WeatherManagerDelegate {
-    func didUpdateWeather(weather: WeatherDataResponse) {
+    func didUpdateWeather(weather: WeatherModel) {
         cityName = "\(weather.city)"
         descriptionWeather = "\(weather.description) (\(weather.temperature))"
+    }
+}
+
+extension CLLocationCoordinate2D {
+    func betweenTwoPoints(coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        return CLLocation(latitude: latitude, longitude: longitude).distance(from: location)
     }
 }
