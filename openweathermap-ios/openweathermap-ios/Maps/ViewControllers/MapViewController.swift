@@ -13,8 +13,8 @@ final class MapViewController: UIViewController {
     private let locationManager = CLLocationManager()
     private let weatherManager = WeatherManager()
     
-    private var cityName: String = ""
-    private var descriptionWeather: String = ""
+    private var cityName = ""
+    private var descriptionWeather = ""
     private var lastCenterCoordinate = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
@@ -143,7 +143,7 @@ extension MapViewController: WeatherManagerDelegate {
     }
 }
 
-extension CLLocationCoordinate2D {
+private extension CLLocationCoordinate2D {
     func betweenTwoPoints(coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         return CLLocation(latitude: latitude, longitude: longitude).distance(from: location)

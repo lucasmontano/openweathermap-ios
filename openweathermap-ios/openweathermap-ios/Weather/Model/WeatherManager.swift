@@ -17,13 +17,10 @@ final class WeatherManager {
     private func getRequest(with utlString: String) {
         guard let url = URL(string: utlString) else { return }
         let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: url) { [unowned self] data, _, erro in
-            if erro != nil {
-                return
-            }
-            guard let safeData = data else { return }
-            if let weather = self.parseJSON(safeData) {
-                self.delegate?.didUpdateWeather(weather: weather)
+        let task = session.dataTask(with: url) { [weak self] data, _, _ in
+            guard let data = data else { return }
+            if let weather = self?.parseJSON(data) {
+                self?.delegate?.didUpdateWeather(weather: weather)
             }
         }
         task.resume()
@@ -31,16 +28,11 @@ final class WeatherManager {
     
     private func parseJSON(_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
-        do {
-            let decodeData = try decoder.decode(WeatherDataResponse.self, from: weatherData)
-            let cityName = decodeData.name
-            let temp = decodeData.main.temp
-            let description = decodeData.weather[0].description
-            let id = decodeData.weather[0].id
-            let weather = WeatherModel(city: cityName, temp: temp, description: description, conditionId: id)
-            return weather
-        } catch {
-            return nil
-        }
+        guard let decodeData = try? decoder.decode(WeatherDataResponse.self, from: weatherData) else { return nil }
+        let cityName = decodeData.name
+        let temp = decodeData.main.temp
+        let description = decodeData.weather[0].description
+        let id = decodeData.weather[0].id
+        return WeatherModel(city: cityName, temp: temp, description: description, conditionId: id)
     }
 }
