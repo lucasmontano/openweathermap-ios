@@ -28,8 +28,8 @@ final class MapViewController: UIViewController {
         weatherManager.delegate = self
     }
     
-    func updateAnnotation(location: CLLocationCoordinate2D) {
-        let annotation = Annotation(coordinate: location, title: cityName, subtitle: descriptionWeather)
+    func updateAnnotation() {
+        let annotation = Annotation(coordinate: mapView.centerCoordinate, title: cityName, subtitle: descriptionWeather)
         if let removeAnnotation = mapView.annotations.first {
             mapView.removeAnnotation(removeAnnotation)
         }
@@ -69,11 +69,13 @@ extension MapViewController: MKMapViewDelegate {
             lastCenterCoordinate = newCoordinate
             weatherManager.fetchWeather(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
         }
-        updateAnnotation(location: mapView.centerCoordinate)
         mapView.overlays.forEach { overlay in
             if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
             }
+        }
+        if distance < 20_000 {
+            updateAnnotation()
         }
     }
     
@@ -138,8 +140,11 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: WeatherManagerDelegate {
     func didUpdateWeather(weather: WeatherModel) {
-        cityName = "\(weather.city)"
-        descriptionWeather = "\(weather.description) (\(weather.temperature))"
+        DispatchQueue.main.async {
+            self.cityName = "\(weather.city)"
+            self.descriptionWeather = "\(weather.description) (\(weather.temperature))"
+            self.updateAnnotation()
+        }
     }
 }
 
