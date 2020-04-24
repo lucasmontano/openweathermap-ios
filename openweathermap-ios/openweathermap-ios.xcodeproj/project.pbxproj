@@ -47,7 +47,7 @@
 		55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		DF6968B4245366A50084244A /* BookmarkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkLocation.swift; sourceTree = "<group>"; };
 		DF6968B9245367EC0084244A /* BookmarkLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkLocationManager.swift; sourceTree = "<group>"; };
-		DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookmarkLocationManagerTest.swift; path = "openweathermap-iosTests/BookmarkLocationManagerTest.swift"; sourceTree = SOURCE_ROOT; };
+		DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookmarkLocationManagerTest.swift; path = "openweathermap-iosTests/BookmarkLocation/Manager/BookmarkLocationManagerTest.swift"; sourceTree = SOURCE_ROOT; };
 		DF6EC58224536B7000E40F28 /* openweathermap-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "openweathermap-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6EC58624536B7000E40F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF6EC591245377CC00E40F28 /* BookmarkEnumaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkEnumaration.swift; sourceTree = "<group>"; };
@@ -167,10 +167,26 @@
 		DF6EC58324536B7000E40F28 /* openweathermap-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */,
+				DF6EC5942453AA2D00E40F28 /* BookmarkLocation */,
 				DF6EC58624536B7000E40F28 /* Info.plist */,
 			);
 			path = "openweathermap-iosTests";
+			sourceTree = "<group>";
+		};
+		DF6EC5942453AA2D00E40F28 /* BookmarkLocation */ = {
+			isa = PBXGroup;
+			children = (
+				DF6EC5952453AA3F00E40F28 /* Manager */,
+			);
+			path = BookmarkLocation;
+			sourceTree = "<group>";
+		};
+		DF6EC5952453AA3F00E40F28 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -20,7 +20,7 @@ class BookmarkLocationManagerTest: XCTestCase {
     }
 
     /**
-        It makes test to create one new Bookmark location
+        It validates if not exits elementes
      */
     func testNoElementsBookmarkLocation() throws {
         UserDefaults.standard.removeObject(forKey: BookmarLocationEnumaration.bookmarkLocation.rawValue)
@@ -62,9 +62,9 @@ class BookmarkLocationManagerTest: XCTestCase {
     }
     
     /**
-        It makes test to create one new Bookmark location
+        It validates if contains two elements in UserDefaults
      */
-    func testTwoAndZeroElementsBookmarkLocation() throws {
+    func testExistsTwoElementsBookmarkLocation() throws {
         UserDefaults.standard.removeObject(forKey: BookmarLocationEnumaration.bookmarkLocation.rawValue)
         let bookmarkLocationFlorida = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
         let bookmarkLocationLisbon = BookmarkLocation(title: "Lisbon - PT", latitude: "38.7436883", longitude: "-9.1952225")
