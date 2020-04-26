@@ -1,47 +1,64 @@
-//
-//  BookmarkLocationService.swift
-//  openweathermap-ios
-//
-//  Created by Cassio Sousa on 24/04/20.
-//
 
 import Foundation
+import os.log
 
-class BookmarkLocationManager: NSObject {
+class BookmarkLocationManager {
 
-    func save(bookmarkLocation: BookmarkLocation) -> [BookmarkLocation] {
-        var allBookmarks = getAll()
+    func save(bookmarkLocation: BookmarkLocation) throws -> [BookmarkLocation] {
+        var allBookmarks = [BookmarkLocation]()
+        do {
+            try allBookmarks = getAll()
+        } catch BookmarkLocationError.keyNotFound {
+            os_log(.info,
+                   "In this method this error occur when %{WHO}@ doesn't exists in UserDefaults int the first time. This message is expect in this case.",
+                    Bookmark.location.rawValue
+            )
+        }
+        
         let defaults = UserDefaults.standard
         allBookmarks.append(bookmarkLocation)
-        let archiveData = self.archiveData(allBookmarks)
-        defaults.set(archiveData, forKey: BookmarLocationEnumaration.bookmarkLocation.rawValue)
+        let archiveData = try self.archiveData(allBookmarks)
+        defaults.set(archiveData, forKey: Bookmark.location.rawValue)
         return allBookmarks
     }
 
-    func getAll() -> [BookmarkLocation] {
-        return unArchiveData()
+    func getAll() throws -> [BookmarkLocation] {
+        return try unArchiveData()
     }
 
-    fileprivate func archiveData(_ allBokkmarks: [BookmarkLocation]) -> Data {
+    private func archiveData(_ allBokkmarks: [BookmarkLocation]) throws -> Data  {
         do {
-            let archiveData = try NSKeyedArchiver.archivedData(withRootObject: allBokkmarks, requiringSecureCoding: false)
+            let archiveData = try NSKeyedArchiver.archivedData( withRootObject: allBokkmarks, requiringSecureCoding: false)
             return archiveData
         } catch let error {
-            debugPrint(error)
+            print(error)
+            throw BookmarkLocationError.archive("Unexpected error at unArchive data: \(error.localizedDescription)")
         }
-        return Data()
     }
 
-    fileprivate func unArchiveData() -> [BookmarkLocation] {
+    private func unArchiveData() throws -> [BookmarkLocation] {
         let defaults = UserDefaults.standard
-        if let data = defaults.data(forKey: BookmarLocationEnumaration.bookmarkLocation.rawValue) {
-            do {
-                let bookmarkLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
-                return bookmarkLocations as? [BookmarkLocation] ?? [BookmarkLocation]()
-            } catch let error {
-                debugPrint(error)
-           }
+        guard let data = defaults.data(forKey: Bookmark.location.rawValue) else {
+            throw BookmarkLocationError.keyNotFound("Unexpected error at unArchive data: Key \(Bookmark.location.rawValue) not found.")
         }
-        return [BookmarkLocation]()
+        
+        do {
+            let bookmarkLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+            guard let bookmarks = bookmarkLocations as? [BookmarkLocation] else {
+                return [BookmarkLocation]()
+            }
+            return  bookmarks
+        } catch let error {
+            throw BookmarkLocationError.unArchive("Unexpected error at unArchive data: \(error.localizedDescription)")
+        }
+    }
+}
+
+// MARK: Extension BookmarLocation enum error
+extension BookmarkLocationManager {
+    enum BookmarkLocationError: Error {
+        case unArchive(String)
+        case keyNotFound(String)
+        case archive(String)
     }
 }

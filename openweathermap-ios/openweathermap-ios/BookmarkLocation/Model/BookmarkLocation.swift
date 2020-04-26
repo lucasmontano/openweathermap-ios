@@ -1,25 +1,25 @@
-//
-//  BookmarkLocation.swift
-//  openweathermap-ios
-//
-//  Created by Cassio Sousa on 24/04/20.
-//
 
 import Foundation
 
-private enum BookmarkLocationKeys: String {
-    case title, latitude, longitude
-}
-
 final class BookmarkLocation: NSObject, NSCoding {
-    let title: String?
-    let latitude: String?
-    let longitude: String?
+    let title: String
+    let latitude: String
+    let longitude: String
 
     init?(coder: NSCoder) {
-        self.title = coder.decodeObject(forKey: BookmarkLocationKeys.title.rawValue) as? String
-        self.latitude = coder.decodeObject(forKey: BookmarkLocationKeys.latitude.rawValue) as? String
-        self.longitude = coder.decodeObject(forKey: BookmarkLocationKeys.longitude.rawValue) as? String
+        guard
+            let title = coder.decodeObject(forKey: BookmarkLocationKeys.title.rawValue) as? String,
+            let latitude = coder.decodeObject(forKey: BookmarkLocationKeys.latitude.rawValue) as? String,
+            let longitude = coder.decodeObject(forKey: BookmarkLocationKeys.longitude.rawValue) as? String
+        else{
+            self.title = ""
+            self.latitude = ""
+            self.longitude = ""
+            return
+        }
+        self.title = title
+        self.latitude = latitude
+        self.longitude = longitude
     }
     init(title: String, latitude: String, longitude: String) {
         self.title = title
@@ -31,5 +31,11 @@ final class BookmarkLocation: NSObject, NSCoding {
         coder.encode(self.latitude, forKey: BookmarkLocationKeys.latitude.rawValue)
         coder.encode(self.longitude, forKey: BookmarkLocationKeys.longitude.rawValue)
     }
+}
 
+// MARK: Extension BookmarLocation enum error
+extension BookmarkLocation {
+    private enum BookmarkLocationKeys: String {
+        case title, latitude, longitude
+    }
 }
