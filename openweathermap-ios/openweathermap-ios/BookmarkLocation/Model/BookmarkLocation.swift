@@ -33,7 +33,7 @@ final class BookmarkLocation: NSObject, NSCoding {
     }
 }
 
-// MARK: Extension BookmarLocation enum error
+// MARK: Extension BookmarkLocationKeys enum
 extension BookmarkLocation {
     private enum BookmarkLocationKeys: String {
         case title, latitude, longitude
