@@ -1,9 +1,3 @@
-//
-//  BookmarkLocationServiceTest.swift
-//  openweathermap-ios
-//
-//  Created by Cassio Sousa on 24/04/20.
-//
 
 import XCTest
 
@@ -13,13 +7,15 @@ final class BookmarkLocationManagerTest: XCTestCase {
     private let userDefaults = UserDefaults.standard
     
     override func setUp() {
+        super.setUp()
         removeBookmarkFromUserDefaults()
     }
     /**
         It validates if not exits elements
      */
     func testNoElementsBookmarkLocation() throws {
-        XCTAssertThrowsError(try sut.getAll(),"Unexpected error at unArchive data: Key \(Bookmark.location.rawValue) not found.")
+        let results = try sut.getAll()
+        XCTAssertEqual(0, results.count)
     }
     
     /**
@@ -29,37 +25,37 @@ final class BookmarkLocationManagerTest: XCTestCase {
         let bookmark = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
         let results = try sut.save(bookmarkLocation: bookmark);
         XCTAssertEqual(1, results.count)
-        XCTAssertEqual("Florida - USA", results[0].title)
+        XCTAssertEqual("Florida - USA", results.first?.title)
     }
     
     /**
         It makes test to create two new Bookmark location
     */
    func testCreateTwoBookmarkLocation() throws {
-       let bookmarkFlorida = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
-       let bookmarLisbon = BookmarkLocation(title: "Lisbon - PT", latitude: "38.7436883", longitude: "-9.1952225")
+       let florida = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
+       let lisbon = BookmarkLocation(title: "Lisbon - PT", latitude: "38.7436883", longitude: "-9.1952225")
        
-       let resultsFlorida = try sut.save(bookmarkLocation: bookmarkFlorida);
+       let resultsFlorida = try sut.save(bookmarkLocation: florida);
 
         XCTAssertEqual(1, resultsFlorida.count)
-        XCTAssertEqual("Florida - USA", resultsFlorida[0].title)
+    XCTAssertEqual("Florida - USA", resultsFlorida.first?.title)
     
-       let results = try sut.save(bookmarkLocation: bookmarLisbon);
+       let results = try sut.save(bookmarkLocation: lisbon);
 
        XCTAssertEqual(2, results.count)
-       XCTAssertEqual("Florida - USA", results[0].title)
-       XCTAssertEqual("Lisbon - PT", results[1].title)
+       XCTAssertEqual("Florida - USA", results.first?.title)
+       XCTAssertEqual("Lisbon - PT", results.last?.title)
     }
     
     /**
         It validates if contains two elements in UserDefaults
      */
     func testExistsTwoElementsBookmarkLocation() throws {
-        let bookmarkLocationFlorida = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
-        let bookmarkLocationLisbon = BookmarkLocation(title: "Lisbon - PT", latitude: "38.7436883", longitude: "-9.1952225")
+        let florida = BookmarkLocation(title: "Florida - USA", latitude: "27.607668", longitude: "-81.604064")
+        let lisbon = BookmarkLocation(title: "Lisbon - PT", latitude: "38.7436883", longitude: "-9.1952225")
         
-        let _ = try sut.save(bookmarkLocation: bookmarkLocationFlorida);
-        let _ = try sut.save(bookmarkLocation: bookmarkLocationLisbon);
+        let _ = try sut.save(bookmarkLocation: florida);
+        let _ = try sut.save(bookmarkLocation: lisbon);
         let results = try sut.getAll()
         XCTAssertEqual(2, results.count)
     }
