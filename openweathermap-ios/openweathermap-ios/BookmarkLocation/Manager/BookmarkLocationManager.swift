@@ -1,4 +1,3 @@
-
 import Foundation
 import os.log
 
@@ -14,7 +13,7 @@ class BookmarkLocationManager {
                     Bookmark.location.rawValue
             )
         }
-        
+
         let defaults = UserDefaults.standard
         allBookmarks.append(bookmarkLocation)
         let archiveData = try self.archiveData(allBookmarks)
@@ -26,7 +25,7 @@ class BookmarkLocationManager {
         return try unArchiveData()
     }
 
-    private func archiveData(_ allBokkmarks: [BookmarkLocation]) throws -> Data  {
+    private func archiveData(_ allBokkmarks: [BookmarkLocation]) throws -> Data {
         do {
             let archiveData = try NSKeyedArchiver.archivedData( withRootObject: allBokkmarks, requiringSecureCoding: false)
             return archiveData
@@ -41,7 +40,7 @@ class BookmarkLocationManager {
         guard let data = defaults.data(forKey: Bookmark.location.rawValue) else {
             throw BookmarkLocationError.keyNotFound("Unexpected error at unArchive data: Key \(Bookmark.location.rawValue) not found.")
         }
-        
+
         do {
             let bookmarkLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
             guard let bookmarks = bookmarkLocations as? [BookmarkLocation] else {

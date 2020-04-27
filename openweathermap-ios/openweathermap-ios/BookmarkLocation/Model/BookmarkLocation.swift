@@ -1,4 +1,3 @@
-
 import Foundation
 
 final class BookmarkLocation: NSObject, NSCoding {
@@ -11,7 +10,7 @@ final class BookmarkLocation: NSObject, NSCoding {
             let title = coder.decodeObject(forKey: BookmarkLocationKeys.title.rawValue) as? String,
             let latitude = coder.decodeObject(forKey: BookmarkLocationKeys.latitude.rawValue) as? String,
             let longitude = coder.decodeObject(forKey: BookmarkLocationKeys.longitude.rawValue) as? String
-        else{
+        else {
             self.title = ""
             self.latitude = ""
             self.longitude = ""

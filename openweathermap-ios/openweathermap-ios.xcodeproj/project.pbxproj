@@ -15,13 +15,13 @@
 		5587459024202F27001A2DE3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5587458F24202F27001A2DE3 /* MapViewController.swift */; };
 		55E0C702242BDCA7004AE9D4 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E0C701242BDCA6004AE9D4 /* Annotation.swift */; };
 		55E0C704242BDCEA004AE9D4 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E0C703242BDCEA004AE9D4 /* AnnotationView.swift */; };
+		DF3CDCE32456637500A78FD6 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6EC591245377CC00E40F28 /* Bookmark.swift */; };
 		DF6968B5245366A50084244A /* BookmarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B4245366A50084244A /* BookmarkLocation.swift */; };
 		DF6968BA245367EC0084244A /* BookmarkLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B9245367EC0084244A /* BookmarkLocationManager.swift */; };
 		DF6EC58C24536BD200E40F28 /* BookmarkLocationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */; };
 		DF6EC58D24536CCB00E40F28 /* BookmarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B4245366A50084244A /* BookmarkLocation.swift */; };
 		DF6EC58E24536D6900E40F28 /* BookmarkLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B9245367EC0084244A /* BookmarkLocationManager.swift */; };
 		DF6EC592245377CC00E40F28 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6EC591245377CC00E40F28 /* Bookmark.swift */; };
-		DF6EC59324537A0400E40F28 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6EC591245377CC00E40F28 /* Bookmark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,9 +326,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF6EC58D24536CCB00E40F28 /* BookmarkLocation.swift in Sources */,
-				DF6EC59324537A0400E40F28 /* Bookmark.swift in Sources */,
 				DF6EC58C24536BD200E40F28 /* BookmarkLocationManagerTest.swift in Sources */,
 				DF6EC58E24536D6900E40F28 /* BookmarkLocationManager.swift in Sources */,
+				DF3CDCE32456637500A78FD6 /* Bookmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

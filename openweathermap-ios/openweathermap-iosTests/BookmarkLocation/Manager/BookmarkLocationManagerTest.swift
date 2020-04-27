@@ -19,7 +19,7 @@ final class BookmarkLocationManagerTest: XCTestCase {
         It validates if not exits elements
      */
     func testNoElementsBookmarkLocation() throws {
-        XCTAssertThrowsError(try sut.getAll(),"Unexpected error at unArchive data: Key \(BookmarkLocationEnumaration.bookmarkLocation.rawValue) not found.")
+        XCTAssertThrowsError(try sut.getAll(),"Unexpected error at unArchive data: Key \(Bookmark.location.rawValue) not found.")
     }
     
     /**
@@ -65,7 +65,7 @@ final class BookmarkLocationManagerTest: XCTestCase {
     }
     
     private func removeBookmarkFromUserDefaults() {
-        userDefaults.removeObject(forKey: BookmarkLocationEnumaration.bookmarkLocation.rawValue)
+        userDefaults.removeObject(forKey: Bookmark.location.rawValue)
     }
 
 }
