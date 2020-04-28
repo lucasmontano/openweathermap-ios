@@ -3,6 +3,7 @@ import XCTest
 
 final class BookmarkLocationManagerTest: XCTestCase {
 
+    private let locationKey = "location"
     private let sut = BookmarkLocationManager()
     private let userDefaults = UserDefaults.standard
     
@@ -61,7 +62,7 @@ final class BookmarkLocationManagerTest: XCTestCase {
     }
     
     private func removeBookmarkFromUserDefaults() {
-        userDefaults.removeObject(forKey: Bookmark.location.rawValue)
+        userDefaults.removeObject(forKey: locationKey)
     }
 
 }
