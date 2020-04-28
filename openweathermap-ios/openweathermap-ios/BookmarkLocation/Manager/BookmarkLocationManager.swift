@@ -19,7 +19,7 @@ final class BookmarkLocationManager {
 
     private func archiveData(_ allBokkmarks: [BookmarkLocation]) throws -> Data {
         do {
-            return  try NSKeyedArchiver.archivedData( withRootObject: allBokkmarks, requiringSecureCoding: false)
+            return try NSKeyedArchiver.archivedData( withRootObject: allBokkmarks, requiringSecureCoding: false)
         } catch let error {
             throw BookmarkLocationError.archive("Unexpected error at unArchive data: \(error.localizedDescription)")
         }
