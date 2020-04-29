@@ -16,6 +16,7 @@ final class MapViewController: UIViewController {
     private var cityName = ""
     private var descriptionWeather = ""
     private var lastCenterCoordinate = CLLocationCoordinate2D()
+    private var isPin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +75,7 @@ extension MapViewController: MKMapViewDelegate {
                 mapView.removeOverlay(overlay)
             }
         }
-        if distance < 20_000 {
+        if distance < 20_000 && isPin {
             updateAnnotation()
         }
     }
@@ -144,6 +145,7 @@ extension MapViewController: WeatherManagerDelegate {
             self.cityName = "\(weather.city)"
             self.descriptionWeather = "\(weather.description) (\(weather.temperature))"
             self.updateAnnotation()
+            self.isPin = true
         }
     }
 }

@@ -14,14 +14,14 @@ final class WeatherManager {
         getRequest(with: urlString)
     }
     
-    private func getRequest(with utlString: String) {
-        guard let url = URL(string: utlString) else { return }
+    private func getRequest(with urlString: String) {
+        guard let url = URL(string: urlString) else { return }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { [weak self] data, _, _ in
             guard let data = data else { return }
-            if let weather = self?.parseJSON(data) {
-                self?.delegate?.didUpdateWeather(weather: weather)
-            }
+            guard let self = self else { return }
+            guard let weather = self.parseJSON(data) else { return }
+            self.delegate?.didUpdateWeather(weather: weather)
         }
         task.resume()
     }
