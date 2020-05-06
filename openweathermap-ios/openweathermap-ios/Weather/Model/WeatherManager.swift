@@ -31,8 +31,8 @@ final class WeatherManager {
         guard let decodeData = try? decoder.decode(WeatherDataResponse.self, from: weatherData) else { return nil }
         let cityName = decodeData.name
         let temp = decodeData.main.temp
-        let description = decodeData.weather[0].description
-        let id = decodeData.weather[0].id
+        guard let description = decodeData.weather.first?.description else { return nil }
+        guard let id = decodeData.weather.first?.id else { return nil }
         return WeatherModel(city: cityName, temp: temp, description: description, conditionId: id)
     }
 }
