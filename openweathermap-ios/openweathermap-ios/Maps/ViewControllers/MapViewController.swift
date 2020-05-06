@@ -10,6 +10,12 @@ final class MapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     private let locationManager = CLLocationManager()
+    private let weatherManager = WeatherManager()
+    
+    private var cityName = ""
+    private var descriptionWeather = ""
+    private var lastCenterCoordinate = CLLocationCoordinate2D()
+    private var isPin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +25,11 @@ final class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        weatherManager.delegate = self
     }
     
-    func updateAnnotation(location: CLLocationCoordinate2D) {
-        let annotation = Annotation(coordinate: location, title: "Rio Grande", subtitle: "Mostly Cloudy")
+    func updateAnnotation() {
+        let annotation = Annotation(coordinate: mapView.centerCoordinate, title: cityName, subtitle: descriptionWeather)
         if let removeAnnotation = mapView.annotations.first {
             mapView.removeAnnotation(removeAnnotation)
         }
@@ -56,11 +63,19 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        updateAnnotation(location: mapView.centerCoordinate)
+        let newCoordinate = mapView.centerCoordinate
+        let distance = newCoordinate.betweenTwoPoints(coordinate: lastCenterCoordinate)
+        if distance > 20_000 {
+            lastCenterCoordinate = newCoordinate
+            weatherManager.fetchWeather(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
+        }
         mapView.overlays.forEach { overlay in
             if overlay is MKCircle {
                 mapView.removeOverlay(overlay)
             }
+        }
+        if distance < 20_000 && isPin {
+            updateAnnotation()
         }
     }
     
@@ -120,5 +135,23 @@ extension MapViewController: CLLocationManagerDelegate {
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
+    }
+}
+
+extension MapViewController: WeatherManagerDelegate {
+    func didUpdateWeather(weather: WeatherModel) {
+        DispatchQueue.main.async {
+            self.cityName = "\(weather.city)"
+            self.descriptionWeather = "\(weather.description) (\(weather.temperature))"
+            self.updateAnnotation()
+            self.isPin = true
+        }
+    }
+}
+
+private extension CLLocationCoordinate2D {
+    func betweenTwoPoints(coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        return CLLocation(latitude: latitude, longitude: longitude).distance(from: location)
     }
 }
