@@ -1,26 +1,25 @@
-
 import Foundation
 import UIKit
 
 class DiagonalBorderButton: UIButton {
-    
+
     private let diagonalBorder = DiagonalBorder()
-    
+
     var cornerSize: CGFloat = CGFloat(10) {
-        didSet{
+        didSet {
             setNeedsDisplay()
         }
     }
-    
+
     var diagonalBorderView: Bool = true {
-        didSet{
+        didSet {
            setNeedsDisplay()
         }
     }
-    
+
     override func draw(_ rect: CGRect) {
        super.draw(rect)
-       if(diagonalBorderView){
+       if diagonalBorderView {
            let path = diagonalBorder.makePoints(frame: rect, cornerSize: cornerSize)
            let caShapeLayer = CAShapeLayer()
            caShapeLayer.fillRule = .nonZero
