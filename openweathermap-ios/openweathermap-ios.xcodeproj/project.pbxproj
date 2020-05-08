@@ -20,6 +20,14 @@
 		DF6EC58C24536BD200E40F28 /* BookmarkLocationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */; };
 		DF6EC58D24536CCB00E40F28 /* BookmarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B4245366A50084244A /* BookmarkLocation.swift */; };
 		DF6EC58E24536D6900E40F28 /* BookmarkLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6968B9245367EC0084244A /* BookmarkLocationManager.swift */; };
+		DF6EC59D2453B32800E40F28 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DF6EC59E2453B32800E40F28 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		DF70D0D42465EB9400DEB321 /* DiagonalBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D0D12465EB9400DEB321 /* DiagonalBorderView.swift */; };
+		DF70D0D52465EB9400DEB321 /* DiagonalBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D0D22465EB9400DEB321 /* DiagonalBorderButton.swift */; };
+		DF70D0D62465EB9400DEB321 /* DiagonalBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D0D32465EB9400DEB321 /* DiagonalBorder.swift */; };
+		DF70D0D92465EB9E00DEB321 /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D0D82465EB9E00DEB321 /* SlideAnimator.swift */; };
+		DF70D0DD2465EBBE00DEB321 /* BookmarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF70D0DB2465EBBE00DEB321 /* BookmarkViewController.xib */; };
+		DF70D0DE2465EBBE00DEB321 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D0DC2465EBBE00DEB321 /* BookmarkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,12 @@
 		DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookmarkLocationManagerTest.swift; path = "openweathermap-iosTests/BookmarkLocation/Manager/BookmarkLocationManagerTest.swift"; sourceTree = SOURCE_ROOT; };
 		DF6EC58224536B7000E40F28 /* openweathermap-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "openweathermap-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6EC58624536B7000E40F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF70D0D12465EB9400DEB321 /* DiagonalBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagonalBorderView.swift; sourceTree = "<group>"; };
+		DF70D0D22465EB9400DEB321 /* DiagonalBorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagonalBorderButton.swift; sourceTree = "<group>"; };
+		DF70D0D32465EB9400DEB321 /* DiagonalBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagonalBorder.swift; sourceTree = "<group>"; };
+		DF70D0D82465EB9E00DEB321 /* SlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
+		DF70D0DB2465EBBE00DEB321 /* BookmarkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkViewController.xib; sourceTree = "<group>"; };
+		DF70D0DC2465EBBE00DEB321 /* BookmarkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +103,8 @@
 		36EC2D40241FA11100A168F4 /* openweathermap-ios */ = {
 			isa = PBXGroup;
 			children = (
+				DF70D0D72465EB9E00DEB321 /* Animator */,
+				DF70D0D02465EB9400DEB321 /* View */,
 				DF6968B6245367AF0084244A /* BookmarkLocation */,
 				55E0C6FF242BDC48004AE9D4 /* Maps */,
 				36EC2D41241FA11100A168F4 /* AppDelegate.swift */,
@@ -138,6 +154,7 @@
 		DF6968B6245367AF0084244A /* BookmarkLocation */ = {
 			isa = PBXGroup;
 			children = (
+				DF70D0DA2465EBBE00DEB321 /* View */,
 				DF6968B8245367D60084244A /* Manager */,
 				DF6968B7245367C50084244A /* Model */,
 			);
@@ -183,6 +200,33 @@
 				DF6EC57C24536A2900E40F28 /* BookmarkLocationManagerTest.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		DF70D0D02465EB9400DEB321 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF70D0D12465EB9400DEB321 /* DiagonalBorderView.swift */,
+				DF70D0D22465EB9400DEB321 /* DiagonalBorderButton.swift */,
+				DF70D0D32465EB9400DEB321 /* DiagonalBorder.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF70D0D72465EB9E00DEB321 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				DF70D0D82465EB9E00DEB321 /* SlideAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		DF70D0DA2465EBBE00DEB321 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF70D0DB2465EBBE00DEB321 /* BookmarkViewController.xib */,
+				DF70D0DC2465EBBE00DEB321 /* BookmarkViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,8 +312,10 @@
 			files = (
 				36EC2D4E241FA11300A168F4 /* LaunchScreen.storyboard in Resources */,
 				557BB3BC242545D3004B5037 /* Localizable.strings in Resources */,
+				DF70D0DD2465EBBE00DEB321 /* BookmarkViewController.xib in Resources */,
 				36EC2D4B241FA11300A168F4 /* Assets.xcassets in Resources */,
 				36EC2D49241FA11100A168F4 /* Main.storyboard in Resources */,
+				DF6EC59E2453B32800E40F28 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,10 +354,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				36EC2D42241FA11100A168F4 /* AppDelegate.swift in Sources */,
+				DF70D0D52465EB9400DEB321 /* DiagonalBorderButton.swift in Sources */,
 				55E0C704242BDCEA004AE9D4 /* AnnotationView.swift in Sources */,
 				DF6968BA245367EC0084244A /* BookmarkLocationManager.swift in Sources */,
+				DF70D0DE2465EBBE00DEB321 /* BookmarkViewController.swift in Sources */,
+				DF70D0D62465EB9400DEB321 /* DiagonalBorder.swift in Sources */,
+				DF70D0D42465EB9400DEB321 /* DiagonalBorderView.swift in Sources */,
 				55E0C702242BDCA7004AE9D4 /* Annotation.swift in Sources */,
+				DF6EC59D2453B32800E40F28 /* (null) in Sources */,
 				5587459024202F27001A2DE3 /* MapViewController.swift in Sources */,
+				DF70D0D92465EB9E00DEB321 /* SlideAnimator.swift in Sources */,
 				DF6968B5245366A50084244A /* BookmarkLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
