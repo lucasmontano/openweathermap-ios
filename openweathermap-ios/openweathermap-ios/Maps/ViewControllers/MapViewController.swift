@@ -121,4 +121,19 @@ extension MapViewController: CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("clicou")
+        let showBookmarkLocationViewController = BookmarkViewController()
+        showBookmarkLocationViewController.transitioningDelegate = showBookmarkLocationViewController
+        present(showBookmarkLocationViewController, animated: true)
+    }
+}
+
+extension MapViewController{
+    public override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil) {
+        viewControllerToPresent.modalPresentationStyle = .custom
+        super.present(viewControllerToPresent, animated: flag,
+        completion: completion)
+    }
 }
